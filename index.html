@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Steps for Installing Jenkins on Ubuntu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #113459;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #113459;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        code {
+            display: block;
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #32a883;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background-color: #b2c439;
+        }
+
+        .copied-btn {
+            background-color: #32a883;
+        }
+
+        footer {
+            background-color: #113459;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .theme-light header {
+            background-color: #113459;
+            color: #fff;
+        }
+
+        .theme-light code {
+            background-color: #e4e3e399;
+            color: #333;
+        }
+
+        .theme-light .copy-btn {
+            background-color: #3da0ce;
+            color: #fff;
+        }
+
+        .theme-light .copy-btn:hover {
+            background-color: #57c439;
+        }
+
+        .theme-light footer {
+            background-color: #113459;
+            color: #fff;
+        }
+
+        /* Dark Theme */
+        .theme-dark {
+            background-color: #000000;
+            color: #f4f4f4;
+        }
+
+        .theme-dark header {
+            background-color: #247ba0;
+            color: #fff;
+        }
+
+        .theme-dark code {
+            background-color: #686863;
+            color: #f4f4f4;
+        }
+
+        .theme-dark .copy-btn {
+            background-color: #ECD21F;
+            color: #fff;
+        }
+
+        .theme-dark .copy-btn:hover {
+            background-color: #113459;
+        }
+
+        .theme-dark footer {
+            background-color: #247ba0;
+            color: #fff;
+        }
+
+        .theme-dark h2 {
+            color: #2994c1;
+        }
+
+        .theme-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #113459;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .theme-btn:hover {
+            background-color: #32a883;
+        }
+
+        .slider-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        body {
+            padding: 50px;
+        }
+
+        .switch {
+            display: inline-block;
+            position: relative;
+        }
+
+        .switch__input {
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            height: 1px;
+            width: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+        }
+
+        .switch__label {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 35px;
+            background-color: #2B2B2B;
+            border: 5px solid #5B5B5B;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(.46, .03, .52, .96);
+        }
+
+        .switch__indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateX(-72%);
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-color: #7B7B7B;
+            border-radius: 9999px;
+            box-shadow: 10px 0px 0 0 rgba(#000000, 0.2) inset;
+        }
+
+        .switch__indicator::before,
+        .switch__indicator::after {
+            position: absolute;
+            content: '';
+            display: block;
+            background-color: #FFFFFF;
+            border-radius: 9999px;
+        }
+
+        .switch__indicator::before {
+            top: 7px;
+            left: 7px;
+            width: 9px;
+            height: 9px;
+            background-color: #FFFFFF;
+            opacity: 0.6;
+        }
+
+        .switch__indicator::after {
+            bottom: 8px;
+            right: 6px;
+            width: 14px;
+            height: 14px;
+            background-color: #FFFFFF;
+            opacity: 0.8;
+        }
+
+        .switch__decoration {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            display: block;
+            width: 5px;
+            height: 5px;
+            background-color: #FFFFFF;
+            border-radius: 9999px;
+            animation: twinkle 0.8s infinite -0.6s;
+        }
+
+        .switch__decoration::before,
+        .switch__decoration::after {
+            position: absolute;
+            display: block;
+            content: '';
+            width: 5px;
+            height: 5px;
+            background-color: #FFFFFF;
+            border-radius: 9999px;
+        }
+
+        .switch__decoration::before {
+            top: -20px;
+            left: 10px;
+            opacity: 1;
+            animation: twinkle 0.6s infinite;
+        }
+
+        .switch__decoration::after {
+            top: -7px;
+            left: 30px;
+            animation: twinkle 0.6s infinite -0.2s;
+        }
+
+        @keyframes twinkle {
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        .switch__indicator,
+        .switch__indicator::before,
+        .switch__indicator::after {
+            transition: all 0.4s cubic-bezier(.46, .03, .52, .96);
+        }
+
+        .switch__input:checked+.switch__label {
+            background-color: #8FB5F5;
+            border-color: #347CF8;
+        }
+
+        .switch__input:checked+.switch__label .switch__indicator {
+            background-color: #ECD21F;
+            box-shadow: none;
+            transform: translate(-50%, -50%) translateX(72%);
+        }
+
+        .switch__input:checked+.switch__label .switch__indicator::before,
+        .switch__input:checked+.switch__label .switch__indicator::after {
+            display: none;
+        }
+
+        .switch__input:checked+.switch__label .switch__decoration {
+            top: 50%;
+            transform: translate(0%, -50%);
+            width: 20px;
+            height: 20px;
+        }
+
+        .switch__input:checked+.switch__label .switch__decoration::before {
+            width: 10px;
+            height: 10px;
+            top: auto;
+            bottom: 0;
+            left: -8px;
+            animation: none;
+        }
+
+        .switch__input:checked+.switch__label .switch__decoration::after {
+            width: 15px;
+            height: 15px;
+            top: auto;
+            bottom: 0;
+            left: 16px;
+            animation: none;
+        }
+
+        .switch__input:checked+.switch__label .switch__decoration,
+        .switch__input:checked+.switch__label .switch__decoration::before,
+        .switch__input:checked+.switch__label .switch__decoration::after {
+            border-radius: 9999px 9999px 0 0;
+        }
+
+        .switch__input:checked+.switch__label .switch__decoration::after {
+            border-bottom-right-radius: 9999px;
+        }
+    </style>
+    <script>
+        function copyCode(elementId) {
+            // Enable text selection for the code element
+            const codeElement = document.getElementById(elementId);
+            codeElement.style.userSelect = 'text';
+
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+
+            // Disable text selection again after copying
+            codeElement.style.userSelect = 'none';
+
+            const copyButton = document.getElementById(`copy-btn-${elementId}`);
+            copyButton.innerHTML = 'Copied!';
+            copyButton.classList.add('copied-btn');
+            copyButton.disabled = true;
+
+            setTimeout(() => {
+                copyButton.innerHTML = 'Copy Code';
+                copyButton.classList.remove('copied-btn');
+                copyButton.disabled = false;
+            }, 2000);
+        }
+
+        function toggleTheme() {
+            const body = document.querySelector('body');
+            const slider = document.querySelector('.slider');
+
+            body.classList.toggle('theme-light');
+            body.classList.toggle('theme-dark');
+
+            if (body.classList.contains('theme-light')) {
+                slider.classList.remove('dark');
+                slider.classList.add('light');
+            } else {
+                slider.classList.remove('light');
+                slider.classList.add('dark');
+            }
+        }
+    </script>
+    <script>
+        // Prevent right-click and inspect element
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        // Disable F12 key
+        document.onkeydown = function (e) {
+            if (e.keyCode == 123) {
+                return false;
+            }
+        };
+
+        // Disable Ctrl+Shift+I/Ctrl+Shift+C
+        document.addEventListener("keydown", function (e) {
+            if ((e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 67)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="container">
+        <header>
+            <h1>Steps for Installing Jenkins on Ubuntu</h1>
+
+
+            <div class="slider-container">
+                <div class="switch">
+                    <input type="checkbox" id="theme-toggle" onclick="toggleTheme()" class="switch__input">
+                    <label for="theme-toggle" class="switch__label">
+                        <span class="switch__indicator"></span>
+                        <span class="switch__decoration"></span>
+                    </label>
+                </div>
+            </div>
+
+        </header>
+
+        <main>
+            <h2>What is Jenkins?</h2>
+            <p>Jenkins is an open-source automation server that helps automate software development processes, including
+                building, testing, and deploying applications. It provides a wide range of plugins and integrations that
+                enable continuous integration and delivery (CI/CD) pipelines, facilitating faster and more efficient
+                software development.</p>
+
+            <h2>Step 1: Updating the Package Lists</h2>
+            <p>To begin, update the package lists on your Ubuntu server. This ensures that the system has the latest
+                information about available packages and their versions.</p>
+            <code id="code1">sudo apt-get update</code>
+            <button class="copy-btn" id="copy-btn-code1" onclick="copyCode('code1')">Copy Code</button>
+
+            <h2>Step 2: Installing Java Runtime Environment (JRE)</h2>
+            <p>Jenkins requires Java to run. Install the default Java Runtime Environment (JRE) package using the
+                following command:</p>
+            <code id="code2">sudo apt-get install default-jre</code>
+            <button class="copy-btn" id="copy-btn-code2" onclick="copyCode('code2')">Copy Code</button>
+
+            <h2>Step 3: Adding the Jenkins Repository Key</h2>
+            <p>In this step, you will add the Jenkins repository key to ensure the authenticity of the Jenkins package
+                that you are about to install.</p>
+            <code
+                id="code3">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -</code>
+                <button class="copy-btn" id="copy-btn-code3" onclick="copyCode('code3')">Copy Code</button>
+
+            <h2>Step 4: Adding the Jenkins Repository</h2>
+            <p>Add the Jenkins repository to the package sources list to enable the system to fetch Jenkins packages
+                during installation.</p>
+            <code
+                id="code4">sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</code>
+                <button class="copy-btn" id="copy-btn-code4" onclick="copyCode('code4')">Copy Code</button>
+
+            <h2>Step 5: Updating the Package Lists (Again)</h2>
+            <p>Update the package lists again to include the newly added Jenkins repository.</p>
+            <code id="code5">sudo apt-get update</code>
+            <button class="copy-btn" id="copy-btn-code5" onclick="copyCode('code5')">Copy Code</button>
+
+            <h2>Step 6: Installing Jenkins</h2>
+            <p>Now, it's time to install Jenkins on your Ubuntu server using the following command:</p>
+            <code id="code6">sudo apt-get install jenkins</code>
+            <button class="copy-btn" id="copy-btn-code6" onclick="copyCode('code6')">Copy Code</button>
+
+            <h2>Step 7: Starting Jenkins</h2>
+            <p>After the installation is complete, you can start the Jenkins service with the following command:</p>
+            <code id="code7">sudo systemctl start jenkins</code>
+            <button class="copy-btn" id="copy-btn-code7" onclick="copyCode('code7')">Copy Code</button>
+
+            <h2>Step 8: Enabling Jenkins on System Startup</h2>
+            <p>To ensure that Jenkins starts automatically when the server boots up, use the following command:</p>
+            <code id="code8">sudo systemctl enable jenkins</code>
+            <button class="copy-btn" id="copy-btn-code8" onclick="copyCode('code8')">Copy Code</button>
+
+            <h2>Step 9: Checking Jenkins Service Status</h2>
+            <p>Verify the status of the Jenkins service to ensure it is running correctly:</p>
+            <code id="code9">sudo systemctl status jenkins</code>
+            <button class="copy-btn" id="copy-btn-code9" onclick="copyCode('code9')">Copy Code</button>
+
+            <h2>Step 10: Accessing Jenkins Web Interface</h2>
+            <p>Open a web browser and navigate to <a href="http://your_server_ip:8080/"
+                    target="_blank">http://your_server_ip:8080/</a>. This will allow you to access the Jenkins web
+                interface where you can configure and manage your Jenkins instance.</p>
+
+            <h2>Step 11: Obtaining the Initial Administrator Password</h2>
+            <p>To complete the Jenkins setup, you need to retrieve the initial administrator password. Execute the
+                following command to obtain it:</p>
+            <code id="code10">sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code>
+            <button class="copy-btn" id="copy-btn-code10" onclick="copyCode('code10')">Copy Code</button>
+        </main>
+
+        <footer>
+            &copy; 2023 Install Jenkins on Ubuntu. All rights reserved.
+        </footer>
+    </div>
+</body>
+
+</html>
