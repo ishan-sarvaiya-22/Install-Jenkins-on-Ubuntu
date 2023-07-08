@@ -23,15 +23,31 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0;
         }
 
         header {
+            flex: 1;
+            /* Expand to fill remaining space */
             background-color: #113459;
             color: #fff;
             padding: 20px;
             text-align: center;
         }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            flex: 1;
+            /* Expand to fill remaining space */
+            margin: 0;
+        }
+
+
 
         h1 {
             font-size: 32px;
@@ -168,6 +184,37 @@
         .theme-btn:hover {
             background-color: #32a883;
         }
+
+        body {
+            display: flex;
+        }
+
+        .nav {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav li {
+            margin-bottom: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav a:hover {
+            color: #113459;
+        }
+
 
         .slider-container {
             display: flex;
@@ -414,22 +461,39 @@
 </head>
 
 <body class="theme-light">
+    <div class="nav">
+        <ul>
+            <li><a href="#step1">Step 1: Updating the Package Lists</a></li>
+            <li><a href="#step2">Step 2: Installing Java Runtime Environment (JRE)</a></li>
+            <li><a href="#step3">Step 3: Adding the Jenkins Repository Key</a></li>
+            <li><a href="#step4">Step 4: Adding the Jenkins Repository</a></li>
+            <li><a href="#step5">Step 5: Updating the Package Lists (Again)</a></li>
+            <li><a href="#step6">Step 6: Installing Jenkins</a></li>
+            <li><a href="#step7">Step 7: Starting Jenkins</a></li>
+            <li><a href="#step8">Step 8: Enabling Jenkins on System Startup</a></li>
+            <li><a href="#step9">Step 9: Checking Jenkins Service Status</a></li>
+            <li><a href="#step10">Step 10: Accessing Jenkins Web Interface</a></li>
+            <li><a href="#step11">Step 11: Obtaining the Initial Administrator Password</a></li>
+        </ul>
+    </div>
+
     <div class="container">
         <header>
-            <h1>Steps for Installing Jenkins on Ubuntu</h1>
+            <div class="header-content">
+                <h1>Steps for Installing Jenkins on Ubuntu</h1>
 
-
-            <div class="slider-container">
-                <div class="switch">
-                    <input type="checkbox" id="theme-toggle" onclick="toggleTheme()" class="switch__input">
-                    <label for="theme-toggle" class="switch__label">
-                        <span class="switch__indicator"></span>
-                        <span class="switch__decoration"></span>
-                    </label>
+                <div class="slider-container">
+                    <div class="switch">
+                        <input type="checkbox" id="theme-toggle" onclick="toggleTheme()" class="switch__input">
+                        <label for="theme-toggle" class="switch__label">
+                            <span class="switch__indicator"></span>
+                            <span class="switch__decoration"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
-
         </header>
+
 
         <main>
             <h2>What is Jenkins?</h2>
@@ -438,63 +502,63 @@
                 enable continuous integration and delivery (CI/CD) pipelines, facilitating faster and more efficient
                 software development.</p>
 
-            <h2>Step 1: Updating the Package Lists</h2>
+            <h2 id="step1">Step 1: Updating the Package Lists</h2>
             <p>To begin, update the package lists on your Ubuntu server. This ensures that the system has the latest
                 information about available packages and their versions.</p>
             <code id="code1">sudo apt-get update</code>
             <button class="copy-btn" id="copy-btn-code1" onclick="copyCode('code1')">Copy Code</button>
 
-            <h2>Step 2: Installing Java Runtime Environment (JRE)</h2>
+            <h2 id="step2">Step 2: Installing Java Runtime Environment (JRE)</h2>
             <p>Jenkins requires Java to run. Install the default Java Runtime Environment (JRE) package using the
                 following command:</p>
             <code id="code2">sudo apt-get install default-jre</code>
             <button class="copy-btn" id="copy-btn-code2" onclick="copyCode('code2')">Copy Code</button>
 
-            <h2>Step 3: Adding the Jenkins Repository Key</h2>
+            <h2 id="step3">Step 3: Adding the Jenkins Repository Key</h2>
             <p>In this step, you will add the Jenkins repository key to ensure the authenticity of the Jenkins package
                 that you are about to install.</p>
             <code
                 id="code3">wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -</code>
-                <button class="copy-btn" id="copy-btn-code3" onclick="copyCode('code3')">Copy Code</button>
+            <button class="copy-btn" id="copy-btn-code3" onclick="copyCode('code3')">Copy Code</button>
 
-            <h2>Step 4: Adding the Jenkins Repository</h2>
+            <h2 id="step4">Step 4: Adding the Jenkins Repository</h2>
             <p>Add the Jenkins repository to the package sources list to enable the system to fetch Jenkins packages
                 during installation.</p>
             <code
                 id="code4">sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</code>
-                <button class="copy-btn" id="copy-btn-code4" onclick="copyCode('code4')">Copy Code</button>
+            <button class="copy-btn" id="copy-btn-code4" onclick="copyCode('code4')">Copy Code</button>
 
-            <h2>Step 5: Updating the Package Lists (Again)</h2>
+            <h2 id="step5">Step 5: Updating the Package Lists (Again)</h2>
             <p>Update the package lists again to include the newly added Jenkins repository.</p>
             <code id="code5">sudo apt-get update</code>
             <button class="copy-btn" id="copy-btn-code5" onclick="copyCode('code5')">Copy Code</button>
 
-            <h2>Step 6: Installing Jenkins</h2>
+            <h2 id="step6">Step 6: Installing Jenkins</h2>
             <p>Now, it's time to install Jenkins on your Ubuntu server using the following command:</p>
             <code id="code6">sudo apt-get install jenkins</code>
             <button class="copy-btn" id="copy-btn-code6" onclick="copyCode('code6')">Copy Code</button>
 
-            <h2>Step 7: Starting Jenkins</h2>
+            <h2 id="step7">Step 7: Starting Jenkins</h2>
             <p>After the installation is complete, you can start the Jenkins service with the following command:</p>
             <code id="code7">sudo systemctl start jenkins</code>
             <button class="copy-btn" id="copy-btn-code7" onclick="copyCode('code7')">Copy Code</button>
 
-            <h2>Step 8: Enabling Jenkins on System Startup</h2>
+            <h2 id="step8">Step 8: Enabling Jenkins on System Startup</h2>
             <p>To ensure that Jenkins starts automatically when the server boots up, use the following command:</p>
             <code id="code8">sudo systemctl enable jenkins</code>
             <button class="copy-btn" id="copy-btn-code8" onclick="copyCode('code8')">Copy Code</button>
 
-            <h2>Step 9: Checking Jenkins Service Status</h2>
+            <h2 id="step9">Step 9: Checking Jenkins Service Status</h2>
             <p>Verify the status of the Jenkins service to ensure it is running correctly:</p>
             <code id="code9">sudo systemctl status jenkins</code>
             <button class="copy-btn" id="copy-btn-code9" onclick="copyCode('code9')">Copy Code</button>
 
-            <h2>Step 10: Accessing Jenkins Web Interface</h2>
+            <h2 id="step10">Step 10: Accessing Jenkins Web Interface</h2>
             <p>Open a web browser and navigate to <a href="http://your_server_ip:8080/"
                     target="_blank">http://your_server_ip:8080/</a>. This will allow you to access the Jenkins web
                 interface where you can configure and manage your Jenkins instance.</p>
 
-            <h2>Step 11: Obtaining the Initial Administrator Password</h2>
+            <h2 id="step11">Step 11: Obtaining the Initial Administrator Password</h2>
             <p>To complete the Jenkins setup, you need to retrieve the initial administrator password. Execute the
                 following command to obtain it:</p>
             <code id="code10">sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code>
